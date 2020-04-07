@@ -1,42 +1,23 @@
-version: 2
-
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
 workflows:
-  version: 2
-  tests:
+  build:
     jobs:
-      - test
-
-jobs:
-  test:
-    docker:
-      - image: cypress/base:8
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-            - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-      - run:
-          name: Yarn install
-          command: yarn install --frozen-lockfile
-      - save_cache:
-          key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - ~/.cache
-      - run:
-          name: Lint code
-          command: npm run lint
-      - run:
-          name: Cypress Verfiy
-          command: $(npm bin)/cypress verify
-      - run:
-          name: Run tests
+      - cypress/run:
+          executor: cypress/base-12-14-0
+          yarn: true
           command: npm test
-      - run: yarn add -D webpack@latest webpack-cli@latest
-      - run:
-          name: Run tests w/ webpack@latest
-          command: npm test
-      - run:
-          name: Semantic release
-          command: npm run semantic-release || true
+          post-steps:
+            - run:
+                name: Lint code 🧹
+                command: npm run lint
+            - run:
+                name: Install latest webpack 📦
+                command: yarn add -D webpack@latest webpack-cli@latest
+            - run:
+                name: Run tests w/ webpack@latest 🧪
+                command: npm test
+            - run:
+                name: Semantic release 🚀
+                command: npm run semantic-release
