@@ -2,6 +2,7 @@
   "name": "@cypress/webpack-preprocessor",
   "version": "0.0.0-development",
   "description": "Cypress preprocessor for bundling JavaScript via webpack",
+  "types": "index.d.ts",
   "private": false,
   "scripts": {
     "ban": "ban",
@@ -33,7 +34,7 @@
     "chalk": "3.0.0",
     "chokidar-cli": "1.2.0",
     "condition-circle": "1.5.0",
-    "cypress": "4.0.2",
+    "cypress": "4.3.0",
     "dependency-check": "2.9.1",
     "deps-ok": "1.2.1",
     "dont-crack": "1.2.1",
