@@ -8,6 +8,6 @@ declare namespace CypressWebpackPreProcessor {
 
 declare module "@cypress/webpack-preprocessor" {
   const _default: (options: CypressWebpackPreProcessor.Options) => CypressWebpackPreProcessor.FilePreprocessor;
-  
+
   export = _default;
 }
